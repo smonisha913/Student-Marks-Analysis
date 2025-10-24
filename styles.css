@@ -1,0 +1,144 @@
+/* ...existing code... */
+:root{
+  --bg1: #fff7ed; /* warm */
+  --bg2: #eef2ff; /* cool */
+  --card:#ffffff;
+  --glass: rgba(255,255,255,0.6);
+  --text:#0f1724;
+  --muted:#55607a;
+  --accent1:#ff6b6b; /* coral */
+  --accent2:#6b8cff; /* blue */
+  --accent3:#7ef0c7; /* mint */
+  --accent4:#ffc56b; /* amber */
+  --shadow: 0 12px 30px rgba(15,23,36,0.10);
+}
+
+/* page background: subtle animated gradient */
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--text);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:36px;
+  background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+  background-size: 400% 400%;
+  animation: bgShift 12s ease infinite;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+@keyframes bgShift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* layout */
+.container{width:100%;max-width:1100px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:12px}
+.title{font-size:1.5rem;font-weight:700;letter-spacing:0.2px}
+.subtitle{color:var(--muted);font-size:0.95rem}
+
+/* card */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.98));
+  border-radius:14px;
+  padding:20px;
+  box-shadow: var(--shadow);
+  border:1px solid rgba(255,255,255,0.6);
+  backdrop-filter: blur(6px);
+}
+
+/* split grid */
+.grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+@media (max-width:920px){ .grid{grid-template-columns:1fr} }
+
+/* form fields */
+.form label{display:block;font-size:0.9rem;color:var(--muted);margin-bottom:8px}
+.input, input[type="text"], input[type="number"]{
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid rgba(14,22,40,0.06);
+  background: linear-gradient(180deg,#ffffff,#fbfdff);
+  font-size:0.95rem;
+  transition: box-shadow .18s ease, transform .08s ease, border-color .12s;
+  outline:none;
+}
+.input:focus, input[type="text"]:focus, input[type="number"]:focus{
+  box-shadow: 0 10px 24px rgba(107,92,255,0.12);
+  transform: translateY(-2px);
+  border-color: rgba(107,92,255,0.26);
+}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:480px){ .fields{grid-template-columns:1fr} }
+
+/* colorful header ribbon */
+.ribbon{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:999px;
+  background: linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));
+  color:white;
+  font-weight:600;
+  box-shadow: 0 8px 26px rgba(107,92,255,0.12);
+}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:0;color:white;
+  background: linear-gradient(90deg,var(--accent2),var(--accent1));
+  cursor:pointer;font-weight:700;box-shadow:0 12px 30px rgba(107,92,255,0.12);transition: transform .12s ease, box-shadow .12s;
+}
+.btn:hover{transform: translateY(-3px);box-shadow:0 18px 40px rgba(107,92,255,0.14)}
+.btn.ghost{background:transparent;color:var(--accent2);border:1px solid rgba(107,92,255,0.12);font-weight:700}
+.btn:active{transform: translateY(0)}
+
+/* aside tips */
+.aside-card{
+  padding:14px;border-radius:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.95));
+  border:1px solid rgba(255,200,100,0.06);
+  box-shadow: 0 8px 20px rgba(255,107,107,0.04);
+}
+
+/* table styles - colorful headers and striped rows */
+.table{width:100%;border-collapse:collapse;margin-top:12px;font-size:0.95rem;border-radius:8px;overflow:hidden}
+.table thead th{
+  padding:12px 14px;text-align:left;color:#022047;
+  background: linear-gradient(90deg, rgba(107,92,255,0.12), rgba(255,107,107,0.08));
+  border-bottom: 1px solid rgba(10,20,40,0.06);
+  font-weight:700;
+}
+.table tbody td{padding:10px 14px;border-bottom:1px solid rgba(10,20,40,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.0), rgba(250,250,255,0.02))}
+.table tbody tr:nth-child(odd) td{background: linear-gradient(90deg, rgba(254,249,240,0.4), rgba(249,252,255,0.01))}
+.table tbody tr:hover td{background: linear-gradient(90deg, rgba(107,92,255,0.03), rgba(255,107,107,0.02))}
+
+/* averages pills - colorful accents */
+.summary{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+.pill{
+  min-width:120px;padding:10px 12px;border-radius:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98));
+  border:1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 8px 20px rgba(10,20,40,0.04);
+  text-align:center;
+}
+.pill .label{font-size:0.82rem;color:var(--muted)}
+.pill .value{font-weight:800;font-size:1.05rem;margin-top:6px;color:var(--accent2)}
+
+/* small utilities */
+.small{font-size:0.88rem;color:var(--muted)}
+.center{display:flex;align-items:center;gap:8px}
+.footer-note{margin-top:12px;color:var(--muted);font-size:0.88rem}
+
+/* subtle animated accent dots in corner */
+.accent-dots{
+  position: absolute;right:18px;top:18px;pointer-events:none;opacity:0.16;
+}
+.accent-dots svg{width:120px;height:120px;filter:blur(8px)}
+/* ...existing code... */

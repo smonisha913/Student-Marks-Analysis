@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Add Student</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="title">Add Student Marks</div>
+      <div class="small">Quickly add a student and view the report</div>
+    </div>
+
+    <div class="card">
+      <div class="grid">
+        <div>
+          <form method="post" action="{{ url_for('add_student') }}" novalidate class="form">
+            <label>
+              <div class="small">Student name</div>
+              <input class="input" type="text" name="name" placeholder="Full name" required>
+            </label>
+
+            <div class="small" style="margin-top:8px">Enter marks for each subject (0–100)</div>
+
+            <div class="fields" style="margin-top:10px">
+              {% for subj in subjects %}
+                <div>
+                  <input type="hidden" name="subjects" value="{{ subj }}">
+                  <label>
+                    <div class="small">{{ subj }}</div>
+                    <input class="input" type="number" name="{{ subj }}" min="0" max="100" step="0.01" placeholder="e.g. 78.5">
+                  </label>
+                </div>
+              {% endfor %}
+            </div>
+
+            <div style="margin-top:12px" class="center">
+              <button class="btn" type="submit">Add and View Report</button>
+              <a class="btn ghost" href="{{ url_for('report') }}">View report</a>
+            </div>
+          </form>
+        </div>
+
+        <aside>
+          <div class="aside-card">
+            <strong style="display:block;margin-bottom:6px">Tips</strong>
+            <ul style="margin:0;padding-left:18px;color:var(--muted);line-height:1.6">
+              <li>Leave a field blank if the student didn't take the subject.</li>
+              <li>Marks may include decimals (e.g. 89.5).</li>
+              <li>The report shows per-student average and subject averages.</li>
+            </ul>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+
+
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

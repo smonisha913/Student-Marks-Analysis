@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Students Report</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">Students Report</h1>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="btn" href="{{ url_for('index') }}">Add student</a>
+      </div>
+    </div>
+
+    <div class="card">
+      {% if not data %}
+        <p class="small">No student data yet. <a href="{{ url_for('index') }}">Add one</a>.</p>
+      {% else %}
+        <div class="small">Showing {{ data|length }} student{{ 's' if data|length > 1 else '' }}</div>
+
+        <table class="table" aria-label="Students table">
+          <thead>
+            <tr>
+              {% for key in data[0].keys() %}
+                <th>{{ key }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in data %}
+              <tr>
+                {% for v in row.values() %}
+                  <td>
+                    {% if v is number %}
+                      {{ '%.2f'|format(v) }}
+                    {% else %}
+                      {{ v }}
+                    {% endif %}
+                  </td>
+                {% endfor %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <div style="margin-top:14px">
+          <h3 style="margin:0 0 8px 0">Subject Averages</h3>
+          <div class="summary">
+            {% if averages %}
+              {% for subj, avg in averages.items() %}
+                <div class="pill">
+                  <div class="label">{{ subj }}</div>
+                  <div class="value">{{ '%.2f'|format(avg) }}</div>
+                </div>
+              {% endfor %}
+            {% else %}
+              <div class="small">No numeric subject columns found.</div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
